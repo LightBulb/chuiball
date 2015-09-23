@@ -27,8 +27,8 @@ module.exports = {
       test: /\.(js|jsx)$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
-    }, { 
-      test: /\.styl$/, 
+    }, {
+      test: /\.styl$/,
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader'),
       include: path.join(__dirname, 'src')
     }]
