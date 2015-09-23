@@ -1,5 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
+var nib = require('nib')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   devtool: 'source-map',
@@ -7,9 +9,12 @@ module.exports = {
     './src/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'static'),
     filename: 'bundle.js',
     publicPath: '/static/'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.styl']
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -22,13 +27,20 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    new ExtractTextPlugin("styles.css", {allChunks: true})
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
+    }, { 
+      test: /\.styl$/, 
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader')
     }]
+  },
+  stylus: {
+    use: [nib()]
   }
-};
+}

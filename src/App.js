@@ -1,39 +1,19 @@
-import React, { Component } from 'react';
-import { NICE, SUPER_NICE } from './colors';
-
-class Counter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  tick() {
-    this.setState({
-      counter: this.state.counter + this.props.increment
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    return (
-      <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
-    );
-  }
-}
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import DocumentTitle from 'react-document-title'
+import Header from './components/Header'
 
 export class App extends Component {
   render() {
     return (
-      <div>
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
-      </div>
+      <DocumentTitle title="足球各种吹">
+        <div>
+          <Header />
+          <div className="container main">
+            { this.props.children }
+          </div>
+        </div>
+      </DocumentTitle>
     );
   }
 }
