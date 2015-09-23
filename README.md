@@ -4,4 +4,4 @@ React plus LeanCloud.
 
 ## Credit
 
-An LightBulb Product.
+A LightBulb Product.
